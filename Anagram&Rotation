@@ -1,0 +1,142 @@
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.Scanner;
+
+
+/*
+ * Here is an example of how to go about in problem solving.
+ * I found this in HackerRank
+ * https://www.hackerrank.com/challenges/java-anagrams/forum
+ */
+
+public class Refresher {
+	
+	//Reference to looking up half a string
+	//https://stackoverflow.com/questions/29618285/printing-first-half-of-a-string-in-java
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		// reads a string or character array (simpler)
+		String mystring = "cdeab";
+		String mystring2 = "abcde";
+
+		
+		//This prints out what half a string looks like
+		System.out.println(mystring.substring(0, mystring.length() / 2));
+		System.out.println(mystring.substring(mystring.length() / 2 , mystring.length()));
+		
+		System.out.println(mystring2.substring(0, mystring.length() / 2));
+		System.out.println(mystring2.substring(mystring.length() / 2 , mystring.length()));
+		/*We can now assign variables, one being used to compare to another,
+		*and check if they equal the same as the opposite half.
+		*/
+		
+		//Here I declare a scanner to take in a string.
+		
+		Scanner sc = new Scanner (System.in);
+		System.out.println("Please enter a string");
+		String comp1 = sc.nextLine();
+		
+		//comp1 will be used to compare a, let's say, comp2
+		
+		System.out.println("Please enter a string to be compared with " + comp1);
+		String comp2 = sc.nextLine();
+		
+		//Just to check, it prints out our inputs
+		System.out.println(comp1 + " " + comp2 + " ");	
+		
+		//Both inputs are passed into the anagram and rotation function.
+		isAnagram(comp1, comp2);
+		isRotation(comp1, comp2);
+		
+	}
+	
+	private static boolean isRotation(String comp1, String comp2) {
+		//We can use the technique we were using previously.(substring)
+		//We can compare the first half of the first input to the 
+		//second half of the second input, that way it will be a rotation.
+		
+		//First thing first, check if they're the same length
+		//we already did this in the anagram function
+		if( comp1.length() != comp2.length()) {
+			System.out.println("Not a rotation");
+			return false;
+		}
+		
+		//If it's the same string...
+		if(Objects.equals(comp1, comp2)) {
+			System.out.println("Nice try, but that's the same word");
+			System.out.println("Not a rotation");
+			return false;
+		}
+		
+		//I tried using substring but that did not work out so good
+		//Please refer to the initial print statements when playing program
+		
+		/*if (comp1.substring(0, comp1.length() / 2) != comp2.substring(comp2.length() / 2 ,  comp2.length())) {
+			System.out.println("This is not a rotation");
+			return true;
+		}*/
+		
+		
+		// I used this method of indexOf and works perfectly!
+		//Source:
+		//https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/
+		if((comp1 + comp1).indexOf(comp2) != -1) {
+			System.out.println("This is a rotation");
+			return true;
+		}
+		
+		System.out.println("Not a rotation");
+		return false;
+		
+	}
+
+	//Booleans are simple to understand and are binary (yes/no)
+	public static boolean isAnagram(String x, String y){		//COMPLETE
+		
+		//This code is to check that if they don't have the same length
+		//Then, logically, it is not an anagram.
+		if( x.length() != y.length()) {
+			System.out.println("Not an anagram");
+			return false;
+		}
+		
+		
+		//If they are the same length... then we can proceed to next step.
+		
+		
+		//Now to check if it's the same word...not an anagram
+		//Here's the link to comparing strings
+		//https://stackoverflow.com/questions/513832/how-do-i-compare-strings-in-java
+		if(Objects.equals(x, y)) {
+			System.out.println("Nice try, but that's the same word");
+			System.out.println("Not an anagram");
+			return false;
+		}
+		
+		
+		//Convert string into char array( extra work but this gives you an
+		//idea that things like these are possible, an exploration of technique
+		
+		char tempArray1[] = x.toCharArray();
+		char tempArray2[] = y.toCharArray(); 
+		
+		Arrays.sort(tempArray1);
+		Arrays.sort(tempArray2);
+		
+		//Now we can initiate a for loop
+		//that checks through a sorted character array to see if they're the same
+		for ( int i = 0; i < tempArray1.length; i++ ) {
+			if (tempArray1[i] != tempArray2[i]) {
+				System.out.println("Not an anagram");
+				return false;
+			}
+		}
+		System.out.println("Anagram");
+		return true;
+	
+	}
+	
+
+}
