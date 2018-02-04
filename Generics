@@ -1,0 +1,175 @@
+package src;
+
+/*Frank Gonzalez
+ * Lab2: Generics
+ */
+
+
+import java.util.List;
+import java.util.Objects;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.function.*;
+
+
+public class Generics {
+	
+	//QUESTION 1: LAYING OUT THE GROUNDWORKs
+	public static <T, R > void main(String[] args) {
+	
+	Integer [] intArry = {1, 2, 3, 4, 5 };
+	Double [] doubArry = {1.1, 2.2, 3.3, 4.4};
+	Character [] charArray = {'H','E','L', 'L', 'O' };
+	String [] strArray = {"once", "upon", "a", "time" };
+	
+	/*
+	printArray(intArry);
+	printArray(doubArry);
+	printArray(charArray);
+	printArray(strArray);
+	*/
+	System.out.println("------------getMax w/ Generics--------------");
+	
+	System.out.println("max Integer is: " + getMax(intArry));
+	System.out.println("max Double is: " + getMax(doubArry));
+	System.out.println("max Character is: " + getMax(charArray));
+	System.out.println("max String is: " + getMax(strArray));
+	
+		}
+	//QUESTION 3
+	/*Generic Methods and Bounded Type Parameters (Generics Tutorial)
+	https://docs.oracle.com/javase/tutorial/java/generics/boundedTypeParams.html
+	*/
+	
+	/*Unbounded Wildcards (Generics Tutorials)
+	 * https://docs.oracle.com/javase/tutorial/java/generics/unboundedWildcards.html
+	 */
+	
+	//ONE METHOD...TO RULE THEM ALL.... (Power of Generics)
+	/*public static <T> void printArray(T[] x) {
+		for(T a : x) {
+			System.out.printf(a + " ");
+		System.out.println();	
+		}
+	}
+	*/
+	
+
+	
+	
+	
+	
+	//QUESTION 5
+	//anArry PLACEHOLDING our previous implementations of array.
+	
+	
+	public static<T extends Comparable <T>> T getMax(T [] anArry){
+		T max = anArry[0];
+		for(T b : anArry) {
+			if (b.compareTo(max) > 0)
+				max = b;
+		//System.out.print(b + " ");
+		}
+		System.out.println();	
+		
+		return max;
+		
+		
+	}
+	
+	
+	public interface findMax <T, R> {
+		
+		R apply(T t);
+		
+		
+	}
+	
+	
+	// Comparable is an object type in this case
+	// We create an array of type comparable named anArry
+	// variable max of type comparable = first index of anArry ( intArry, doubArry,charArray,etc.
+	//ADVANCED FOR LOOP
+
+	// QUESTION 4: get w/ Comparable
+	/*
+	public static Comparable getMax(Comparable [] anArry){
+		Comparable max = anArry[0];
+		for(Comparable b : anArry) {
+			if (b.compareTo(max) > 0)
+				max = b;
+		//	System.out.print(b + " ");
+		//System.out.println();	
+		}
+		return max;
+		
+		
+	}
+	*/
+	/*
+	Comparable max = anArry[0];
+		for(int i=0; i<anArry.length; i++) {
+			
+			
+		}
+		return max;
+		
+		
+	}
+	*/
+		
+	// QUESTION 2: OVERLOADING W/ Advanced FOR LOOP
+	/*
+	private static void printArray(String[] strArray) {
+		// TODO Auto-generated method stub
+		for (String x : strArray)
+			System.out.printf("%s ",x);
+		System.out.println();
+		
+	}
+
+	private static void printArray(Character[] charArray) {
+		// TODO Auto-generated method stub
+		for (Character x : charArray)
+			System.out.printf("%s ",x);
+		System.out.println();
+	}
+
+	private static void printArray(Double[] doubArry) {
+		// TODO Auto-generated method stub
+		for (Double x : doubArry)
+			System.out.printf("%s ",x);
+		System.out.println();
+	}
+
+	private static void printArray(Integer[] intArry) {
+		// TODO Auto-generated method stub
+		for (Integer x : intArry)
+			System.out.printf("%s ",x);
+		System.out.println();
+		
+	}
+	*/
+	
+	/*Question 1
+	private static void printArray(String[] strArray) {
+		// TODO Auto-generated method stub
+		System.out.println(Arrays.toString(strArray));
+	}
+
+	private static void printArray(Character[] charArray) {
+		// TODO Auto-generated method stub
+		System.out.println(Arrays.toString(charArray));
+	}
+
+	private static void printArray(Double[] doubArry) {
+		// TODO Auto-generated method stub
+		System.out.println(Arrays.toString(doubArry));
+	}
+	private static void printArray(Integer[] intArry) {
+		// TODO Auto-generated method stub
+		System.out.println(Arrays.toString(intArry));
+	}
+	*/
+}
+
